@@ -6,15 +6,18 @@ import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
 
 
+import { MsalProvider } from "@azure/msal-react";
 
 
 function App() {
     return (
+      <MsalProvider>
         <PageLayout>
-            <Grid container justifyContent="center">
-                <Pages />
-            </Grid>
+          <Grid container justifyContent="center">
+            <Pages />
+          </Grid>
         </PageLayout>
+      </MsalProvider>
     );
 }
 
