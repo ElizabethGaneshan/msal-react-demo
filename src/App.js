@@ -5,6 +5,17 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
 
+
+import { PublicClientApplication } from "@azure/msal-browser";
+
+const pca = new PublicClientApplication({
+  auth: {
+    clientId: "",
+    authority: "",
+    redirectUri: "/",
+  },
+});
+
 function App() {
     return (
         <PageLayout>
