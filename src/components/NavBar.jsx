@@ -26,7 +26,7 @@ const NavBar = () => {
           <Button component={RouterLink} to="/profile" color="inherit">
             Profile
           </Button>
-          {isAuthenticated ? <SignInButton /> : <SignOutButton />}
+          {isAuthenticated ? <SignOutButton /> : <SignInButton />}
         </Toolbar>
       </AppBar>
     </div>
