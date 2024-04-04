@@ -9,9 +9,9 @@ import { Profile } from "./pages/Profile";
 import { MsalProvider } from "@azure/msal-react";
 
 
-function App() {
+function App({msalInstance}) {
     return (
-      <MsalProvider>
+      <MsalProvider instance={msalInstance}>
         <PageLayout>
           <Grid container justifyContent="center">
             <Pages />
