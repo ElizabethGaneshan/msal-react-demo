@@ -5,6 +5,10 @@ import { useMsal } from '@azure/msal-react';
 export const SignInButton = () => {
 
     const { instance } = useMsal();
+
+    const handleSignIn = () => {
+      instance.loginRedirect();
+    };
     
     return (
         <Button color="inherit">Sign in</Button>
