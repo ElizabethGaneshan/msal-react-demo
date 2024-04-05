@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from './App';
 
-import { PublicClientApplication } from "@azure/msal-browser";
+import { EventType, PublicClientApplication } from "@azure/msal-browser";
 
 const pca = new PublicClientApplication({
   auth: {
@@ -17,6 +17,13 @@ const pca = new PublicClientApplication({
       "https://login.microsoftonline.com/b35b51f3-994b-4ff8-85d5-ef6995f6121d", // (overiew / (Endpoints /OAuth 2.0 authorization endpoint (v2)))
     redirectUri: "/",
   },
+});
+
+pca.addEventCallback((event) => {
+  if (event.eventType === EventType.LOGIN_SUCCESS) {
+    console.log(event);
+    pca.setActiveAccount(event.payload.account);
+  }
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
