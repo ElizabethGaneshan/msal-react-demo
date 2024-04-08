@@ -1,19 +1,6 @@
 import React, { useState } from "react";
 
-// export const fetchData = (method = "POST", endpoint, accessToken) => {
-//   const bearer = `Bearer ${accessToken}`;
 
-//   const options = {
-//     method: method,
-//     headers: {
-//       Authorization: bearer,
-//     },
-//   };
-
-//   return fetch(endpoint, options)
-//     .then((resp) => console.log(resp.json()))
-//     .catch((err) => console.log(err));
-// };
 
 const Form = () => {
   const [formData, setFormData] = useState({
