@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-
-
+import { fetchData } from "../fetch";
 
 const Form = () => {
   const [formData, setFormData] = useState({
     EmployeeName: "",
-    EmployeeId: "",
+    // EmployeeId: "",
   });
+
+  const accessToken = localStorage.getItem("accessToken");
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,7 +18,20 @@ const Form = () => {
     });
   };
 
-//   console.log(sessionStorage.getItem());
+  const demoFun = () => {
+    fetchData(
+      // "http://localhost:5011/Employee",
+      // { firstName: "SwathiG" },
+      // { accessToken }
+      {
+        endpoint: "http://localhost:5011/Employee",
+        accessToken: accessToken,
+        requestData: { firstName: formData.EmployeeName },
+      }
+    );
+  };
+
+
   return (
     <div>
       <h2>Fill in the employee form</h2>
@@ -29,17 +44,9 @@ const Form = () => {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label htmlFor="">Employee Id</label>
-        <input
-          type="text"
-          name="EmployeeId"
-          value={formData.EmployeeId}
-          onChange={handleChange}
-        />
-      </div>
-          {/* <button onClick={fetchData()}>Sumbit</button> */}
-          <button>Submit</button>
+     
+      <button onClick={() => demoFun()}>Sumbit</button>
+      {/* <button>Submit</button> */}
     </div>
   );
 };

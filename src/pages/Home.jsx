@@ -6,14 +6,14 @@ import {
 } from "@azure/msal-react";
 import Form from "../components/Form";
 
-export const Home = () => {
+export const Home = ({accessToken}) => {
   return (
     <>
       <AuthenticatedTemplate>
         {/* <Typography variant="h6">
           You are signed-in. Select profile to call Microsoft Graph.
         </Typography> */}
-        <Form /> 
+        <Form accessToken={accessToken} /> 
       </AuthenticatedTemplate>
 
       <UnauthenticatedTemplate>
