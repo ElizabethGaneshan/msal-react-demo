@@ -27,9 +27,14 @@ const pca = new PublicClientApplication({
   },
 });
 
+
+
+
 pca.addEventCallback((event) => {
   if (event.eventType === EventType.LOGIN_SUCCESS) {
     console.log(event);
+    console.log(event.payload.accessToken)
+    console.log(event.payload.idToken);
     pca.setActiveAccount(event.payload.account);
   }
 });

@@ -4,14 +4,16 @@ import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
+import Form from "../components/Form";
 
 export const Home = () => {
   return (
     <>
       <AuthenticatedTemplate>
-        <Typography variant="h6">
+        {/* <Typography variant="h6">
           You are signed-in. Select profile to call Microsoft Graph.
-        </Typography>
+        </Typography> */}
+        <Form /> 
       </AuthenticatedTemplate>
 
       <UnauthenticatedTemplate>
