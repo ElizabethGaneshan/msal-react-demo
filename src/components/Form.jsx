@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchData } from "../fetch";
 
 const Form = () => {
@@ -8,7 +8,6 @@ const Form = () => {
   });
 
   const accessToken = localStorage.getItem("accessToken");
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,19 +17,31 @@ const Form = () => {
     });
   };
 
-  const demoFun = () => {
-    fetchData(
-      // "http://localhost:5011/Employee",
-      // { firstName: "SwathiG" },
-      // { accessToken }
-      {
-        endpoint: "http://localhost:5011/Employee",
-        accessToken: accessToken,
-        requestData: { firstName: formData.EmployeeName },
-      }
-    );
-  };
+  // const demoFun = () => {
+  //   fetchData(
+  //     // "http://localhost:5011/Employee",
+  //     // { firstName: "SwathiG" },
+  //     // { accessToken }
+  //     {
+  //       endpoint: "http://localhost:5011/Employee",
+  //       accessToken: accessToken,
+  //       requestData: { firstName: formData.EmployeeName },
+  //     }
+  //   );
+  // };
 
+  // useEffect(() => {
+  //   fetchData(
+  //     // "http://localhost:5011/Employee",
+  //     // { firstName: "SwathiG" },
+  //     // { accessToken }
+  //     {
+  //       endpoint: "http://localhost:5011/Employee",
+  //       accessToken: accessToken,
+  //       requestData: { firstName: formData.EmployeeName },
+  //     }
+  //   );
+  // });
 
   return (
     <div>
@@ -44,8 +55,18 @@ const Form = () => {
           onChange={handleChange}
         />
       </div>
-     
-      <button onClick={() => demoFun()}>Sumbit</button>
+
+      <button
+        onClick={() =>
+          formData.EmployeeName &&
+          fetchData({
+            endpoint: "http://localhost:5011/Employee",
+            accessToken: accessToken,
+            requestData: { firstName: formData.EmployeeName },
+          })
+        }>
+        Sumbit
+      </button>
       {/* <button>Submit</button> */}
     </div>
   );

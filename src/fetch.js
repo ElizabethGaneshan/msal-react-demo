@@ -15,13 +15,18 @@ export const fetchData = async ({
     body: JSON.stringify(requestData),
   };
 
-  console.log(method, endpoint, accessToken, requestData);
+  // console.log(method, endpoint, accessToken, requestData);
   try {
     const resp = await fetch(endpoint, options);
-    console.log(resp.json());
+    // console.log(resp.json());
+    resp.json();
     return;
   } catch (err) {
     console.log(err);
     return;
   }
 };
+
+
+
+

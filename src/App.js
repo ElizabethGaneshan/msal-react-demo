@@ -20,7 +20,7 @@ function App({ msalInstance }) {
         //   setAccessToken(e.payload.accessToken),
         //   "from APP useEffect"
         // );
-        console.log(e);
+        // console.log(e);
         setAccessToken(e.payload.accessToken);
         localStorage.setItem("accessToken", e.payload.accessToken);
       }
