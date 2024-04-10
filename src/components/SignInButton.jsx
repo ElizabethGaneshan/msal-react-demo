@@ -8,7 +8,6 @@ export const SignInButton = () => {
 
     const handleSignIn = () => {
         instance.loginRedirect({
-          //   scopes: ["user.read"],
           scopes: [
             "api://cba85205-493e-4608-9ba2-1c4bd8b73702/ReadUserDataScope",
           ],

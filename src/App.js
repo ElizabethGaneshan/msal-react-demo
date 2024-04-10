@@ -6,42 +6,93 @@ import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
 
 import { EventType } from "@azure/msal-browser";
-import { MsalProvider } from "@azure/msal-react";
+import { MsalProvider, useMsal } from "@azure/msal-react";
 import { useEffect, useState } from "react";
+import axios from "axios";
+
+const axiosApi = axios.create({
+  baseURL: "http://localhost:5011",
+  headers: { "Content-Type": "application/json" },
+});
 
 function App({ msalInstance }) {
-  const [accessToken, setAccessToken] = useState();
-
+  const { accounts } = useMsal();
+  
   useEffect(() => {
-    msalInstance.addEventCallback((e) => {
+    const callbackID = msalInstance.addEventCallback((e) => {
       if (e.eventType === EventType.LOGIN_SUCCESS) {
         msalInstance.setActiveAccount(e.payload.account);
-        // console.log(
-        //   setAccessToken(e.payload.accessToken),
-        //   "from APP useEffect"
-        // );
-        // console.log(e);
-        setAccessToken(e.payload.accessToken);
-        localStorage.setItem("accessToken", e.payload.accessToken);
       }
     });
-  });
+
+    return () => msalInstance.removeEventCallback(callbackID);
+  }, [msalInstance]);
+
+  useEffect(() => {
+    const accessTokenRequest = {
+      scopes: ["api://cba85205-493e-4608-9ba2-1c4bd8b73702/ReadUserDataScope"],
+      account: accounts[0],
+    };
+
+    //Request interceptor
+    axiosApi.interceptors.request.use(async (config) => {
+      const accessTokenResponse = await msalInstance.acquireTokenSilent(
+        accessTokenRequest
+      );
+
+      if (accessTokenResponse?.accessToken) {
+        config.headers[
+          "Authorization"
+        ] = `Bearer ${accessTokenResponse.accessToken}`;
+      }
+
+      return config;
+    });
+
+    //Response interceptor
+    axiosApi?.interceptors?.response?.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        const originalRequest = error.config;
+        //If i have accessToken and The access token is expired
+        if (error?.response?.status === 401) {
+          //Request for another accessToken
+          msalInstance
+            .acquireTokenSilent(accessTokenRequest)
+            .then((accessTokenResponse) => {
+              let accessToken = accessTokenResponse.accessToken;
+              axios.defaults.headers.common["Authorization"] =
+                "Bearer " + accessToken;
+              return originalRequest;
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
+
+        return Promise.reject(error);
+      }
+    );
+  }, [accounts, msalInstance]);
 
   return (
     <MsalProvider instance={msalInstance}>
       <PageLayout>
         <Grid container justifyContent="center">
-          <Pages accessToken={accessToken} />
+          <Pages axiosApi={axiosApi} />
         </Grid>
       </PageLayout>
     </MsalProvider>
   );
 }
 
-const Pages = ({ accessToken }) => {
+const Pages = ({ axiosApi }) => {
+ 
   return (
     <Routes>
-      <Route path="/" element={<Home accessToken={accessToken} />} />
+      <Route path="/" element={<Home axiosApi={axiosApi} />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );

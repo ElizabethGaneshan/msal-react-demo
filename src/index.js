@@ -25,23 +25,20 @@ const pca = new PublicClientApplication({
       "https://login.microsoftonline.com/b35b51f3-994b-4ff8-85d5-ef6995f6121d",
     redirectUri: "/",
   },
+  // cache: {
+  //   cacheLocation: "sessionStorage",
+  // },
 });
 
-
-
-
-// pca.addEventCallback((event) => {
-//   if (event.eventType === EventType.LOGIN_SUCCESS) {
-//     console.log(event);
-//     console.log(event.payload.accessToken)
-//     console.log(event.payload.idToken);
-//     pca.setActiveAccount(event.payload.account);
-    
-//   }
-//   // if (event.eventType === EventType.ACQUIRE_TOKEN_START) {
-//     // pca.acquireTokenSilent(event.payload.accessToken)
-//   // }
-// });
+pca.addEventCallback((event) => {
+  if (event.eventType === EventType.LOGIN_SUCCESS) {
+    console.log(event);
+    pca.setActiveAccount(event.payload.account);
+  }
+  // if (event.eventType === EventType.ACQUIRE_TOKEN_START) {
+  // pca.acquireTokenSilent(event.payload.accessToken)
+  // }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
