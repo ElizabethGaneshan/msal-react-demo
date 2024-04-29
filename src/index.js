@@ -35,9 +35,9 @@ pca.addEventCallback((event) => {
     console.log(event);
     pca.setActiveAccount(event.payload.account);
   }
-  // if (event.eventType === EventType.ACQUIRE_TOKEN_START) {
-  // pca.acquireTokenSilent(event.payload.accessToken)
-  // }
+  if (event.eventType === EventType.ACQUIRE_TOKEN_START) {
+  pca.acquireTokenSilent(event.payload.accessToken)
+  } 
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -17,7 +17,7 @@ const axiosApi = axios.create({
 
 function App({ msalInstance }) {
   const { accounts } = useMsal();
-  
+
   useEffect(() => {
     const callbackID = msalInstance.addEventCallback((e) => {
       if (e.eventType === EventType.LOGIN_SUCCESS) {
@@ -40,6 +40,7 @@ function App({ msalInstance }) {
         accessTokenRequest
       );
 
+      console.log(accessTokenResponse, "accessTokenResponse");
       if (accessTokenResponse?.accessToken) {
         config.headers[
           "Authorization"
@@ -89,11 +90,10 @@ function App({ msalInstance }) {
 }
 
 const Pages = ({ axiosApi }) => {
- 
   return (
     <Routes>
       <Route path="/" element={<Home axiosApi={axiosApi} />} />
-      <Route path="/profile" element={<Profile />} />
+      {/* <Route path="/profile" element={<Profile />} /> */}
     </Routes>
   );
 };
