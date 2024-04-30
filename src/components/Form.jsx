@@ -8,7 +8,6 @@ const Form = ({ axiosApi }) => {
 
   const [employee, setEmployee] = useState(null);
 
-  // const accessToken = localStorage.getItem("accessToken");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,32 +17,6 @@ const Form = ({ axiosApi }) => {
     });
   };
 
-  // const demoFun = () => {
-  //   fetchData(
-  //     // "http://localhost:5011/Employee",
-  //     // { firstName: "SwathiG" },
-  //     // { accessToken }
-  //     {
-  //       endpoint: "http://localhost:5011/Employee",
-  //       accessToken: accessToken,
-  //       requestData: { firstName: formData.EmployeeName },
-  //     }
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   fetchData(
-  //     // "http://localhost:5011/Employee",
-  //     // { firstName: "SwathiG" },
-  //     // { accessToken }
-  //     {
-  //       endpoint: "http://localhost:5011/Employee",
-  //       accessToken: accessToken,
-  //       requestData: { firstName: formData.EmployeeName },
-  //     }
-  //   );
-  // });
-
   const postEmployees = async () => {
     console.log("Button clicked");
     try {
@@ -52,7 +25,6 @@ const Form = ({ axiosApi }) => {
       });
 
       if (response.status === 200) {
-        console.log("data", response.data);
         setEmployee(response?.data);
       }
     } catch (e) {
@@ -75,7 +47,7 @@ const Form = ({ axiosApi }) => {
 
         <button
           onClick={() =>
-            formData.EmployeeName.trim() !== "" && postEmployees()
+            formData?.EmployeeName?.trim() !== "" && postEmployees()
           }>
           Sumbit
         </button>
