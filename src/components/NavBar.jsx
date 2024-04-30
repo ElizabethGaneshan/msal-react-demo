@@ -24,8 +24,8 @@ const NavBar = () => {
           </Typography>
           {isAuthenticated ? <WelcomeName /> : null}
           {isAuthenticated && (
-            <Button component={RouterLink} to="/profile" color="inherit">
-              Profile
+            <Button component={RouterLink} to="/employee" color="inherit">
+              Employee
             </Button>
           )}
 

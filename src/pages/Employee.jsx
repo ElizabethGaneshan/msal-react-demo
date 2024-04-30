@@ -1,9 +1,11 @@
 import Form from "../components/Form";
 
-export const Profile = ({ axiosApi }) => {
+const Employee = ({ axiosApi }) => {
   return (
     <>
       <Form axiosApi={axiosApi} />
     </>
   );
 };
+
+export default Employee

@@ -3,7 +3,7 @@ import { PageLayout } from "./components/PageLayout";
 import { Routes, Route } from "react-router-dom";
 
 import { Home } from "./pages/Home";
-import { Profile } from "./pages/Profile";
+import Employee, { Profile } from "./pages/Employee";
 
 import { EventType } from "@azure/msal-browser";
 import { MsalProvider, useMsal } from "@azure/msal-react";
@@ -93,7 +93,7 @@ const Pages = ({ axiosApi }) => {
   return (
     <Routes>
       <Route path="/" element={<Home axiosApi={axiosApi} />} />
-      <Route path="/profile" element={<Profile axiosApi={axiosApi} />} />
+      <Route path="/employee" element={<Employee axiosApi={axiosApi} />} />
     </Routes>
   );
 };
