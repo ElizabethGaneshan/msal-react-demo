@@ -19,6 +19,8 @@ export const Home = ({ axiosApi }) => {
     }
   }, [instance]);
 
+
+  console.log(localStorage.getItem("Token"));
   return (
     <>
       <AuthenticatedTemplate
