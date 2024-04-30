@@ -93,7 +93,7 @@ const Pages = ({ axiosApi }) => {
   return (
     <Routes>
       <Route path="/" element={<Home axiosApi={axiosApi} />} />
-      {/* <Route path="/profile" element={<Profile />} /> */}
+      <Route path="/profile" element={<Profile axiosApi={axiosApi} />} />
     </Routes>
   );
 };

@@ -1,15 +1,9 @@
-import { ProfileData } from "../components/ProfileData";
+import Form from "../components/Form";
 
-export const Profile = () => {
-    return (
-        <>
-            <ProfileData graphData={{
-                displayName: 'Dummy Joe',
-                jobTitle: 'Dummy Title',
-                mail: 'dummy@mail.com',
-                businessPhones: ['1234567890'],
-                officeLocation: 'dummy address',
-            }} />
-        </>
-    )
-}
+export const Profile = ({ axiosApi }) => {
+  return (
+    <>
+      <Form axiosApi={axiosApi} />
+    </>
+  );
+};

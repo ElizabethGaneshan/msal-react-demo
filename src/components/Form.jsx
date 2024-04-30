@@ -84,8 +84,8 @@ const Form = ({ axiosApi }) => {
 
       <div>
         <h2>Employees data</h2>
-        {employee?.map((employee) => {
-          return <div>{employee?.firstName} </div>;
+        {employee?.map((employee, index) => {
+          return <div key={index}>{employee?.firstName} </div>;
         })}
       </div>
     </div>
